@@ -3,13 +3,14 @@ module Control.Concurrent.Multiprocessing
     where
 
 import Prelude hiding (catch)
-import Data.Either (partitionEithers)
+import Control.Concurrent.MVar
+import Control.Concurrent.ParallelIO.Local hiding (parallel_)
 import Control.DeepSeq
 import Control.Exception
 import Control.Monad
-import Control.Concurrent.MVar
+import Data.Either (partitionEithers)
 import GHC.Conc
-import Control.Concurrent.ParallelIO.Local hiding (parallel_)
+import System.IO
 import qualified Control.Monad.Par as Par
 
 -- |
@@ -58,7 +59,8 @@ parForM_ xs action = withPool numCapabilities $ \pool -> do
         (forM (map (map action) splitted) $ \s -> do
             rs <- parallelInterleavedE pool s
             rs `pseq` return rs)
-    print errs
+    when (not $ null errs) $ hPutStrLn stderr ("parForM_ exceptions: " ++
+        show errs)
 
 -- | Apply a given function to each argument in the list in parallel with
 -- execution batched to the number of capabilities (cores) of the machine
