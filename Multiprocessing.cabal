@@ -7,13 +7,13 @@ Name:                Multiprocessing
 -- The package version. See the Haskell package versioning policy
 -- (http://www.haskell.org/haskellwiki/Package_versioning_policy) for
 -- standards guiding when and how versions should be incremented.
-Version:             0.1
+Version:             0.1.1
 
 -- A short (one-line) description of the package.
-Synopsis:            Parallelism and Concurrency utilities
+Synopsis:            Utilities and helpers for simple parallel execution
 
 -- A longer description of the package.
--- Description:         
+-- Description:
 
 -- The license under which the package is released.
 License:             BSD3
@@ -29,7 +29,7 @@ Author:              Ryan Burton
 Maintainer:          ryan@thoughtleadr.com
 
 -- A copyright notice.
--- Copyright:           
+-- Copyright:
 
 Category:            Concurrency
 
@@ -37,7 +37,7 @@ Build-type:          Simple
 
 -- Extra files to be distributed with the package, such as examples or
 -- a README.
--- Extra-source-files:  
+-- Extra-source-files:
 
 -- Constraint on the version of Cabal needed to build this package.
 Cabal-version:       >=1.2
@@ -46,13 +46,13 @@ Cabal-version:       >=1.2
 Library
   -- Modules exported by the library.
   Exposed-modules: Control.Concurrent.Multiprocessing
-  
+
   -- Packages needed in order to build this package.
-  Build-depends: base, parallel-io
-  
+  Build-depends: base, deepseq, monad-par, parallel-io
+
   -- Modules not exported by this package.
-  -- Other-modules:       
-  
+  -- Other-modules:
+
   -- Extra tools (e.g. alex, hsc2hs, ...) needed to build the source.
-  -- Build-tools:         
-  
+  -- Build-tools:
+
